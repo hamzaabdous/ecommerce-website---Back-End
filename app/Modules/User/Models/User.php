@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use App\Modules\Role\Models\Role;
+use App\Modules\Picture\Models\Picture;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,9 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+    public function picture(){
+        return $this->belongsTo(Picture::class);
     }
     protected $fillable = [
         'username',
