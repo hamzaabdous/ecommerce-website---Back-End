@@ -30,8 +30,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
     public function picture(){
-        return $this->belongsTo(Picture::class);
+      //  return $this->belongsTo(Picture::class);
+        return $this->hasMany(Picture::class);
     }
+
     protected $fillable = [
         'username',
         "lastName",

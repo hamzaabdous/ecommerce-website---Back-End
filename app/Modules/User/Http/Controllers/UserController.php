@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Modules\Role\Models\Role;
 use App\Modules\User\Models\User;
-
+use App\Modules\Picture\Models\Picture;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,6 +30,8 @@ class UserController extends Controller
     }
     public function get($id){
         $user=User::find($id);
+      //  $picture=Picture::find($user->picture->id);
+
         if(!$user){
             return [
                 "payload" => "The searched row does not exist !",
@@ -38,6 +40,7 @@ class UserController extends Controller
         }
         else {
             $user->role=$user->role;
+            $user->picture=$user->picture;
             return [
                 "payload" => $user,
                 "status" => "200_1"
