@@ -13,7 +13,13 @@ class Picture extends Migration
      */
     public function up()
     {
-        //
+         Schema::create('pictures', function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->string("filename");
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,7 @@ class Picture extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('photos');
+
     }
 }

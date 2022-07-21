@@ -4,8 +4,90 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "ed0caa5dcf98cc24a6081900775ff4a8",
     "packages": [
+        {
+            "name": "artem-schander/l5-modular",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/L5Modular/L5Modular.git",
+                "reference": "1038b3208a2c8651133a3b5ea943b83de1626e29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/L5Modular/L5Modular/zipball/1038b3208a2c8651133a3b5ea943b83de1626e29",
+                "reference": "1038b3208a2c8651133a3b5ea943b83de1626e29",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.7",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "laravel/framework": "^5|^6|^7",
+                "mockery/mockery": "^1.3",
+                "orchestra/testbench": "^3|^4|^5",
+                "phpunit/phpunit": "^7|^8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ArtemSchander\\L5Modular\\ModuleServiceProvider"
+                    ],
+                    "aliases": {
+                        "L5Modular": "ArtemSchander\\L5Modular\\Facades\\L5Modular"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ArtemSchander\\L5Modular\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Schander",
+                    "email": "info@artekk.de",
+                    "homepage": "https://artekk.de"
+                }
+            ],
+            "description": "Modular pattern generator for Laravel",
+            "homepage": "https://l5modular.com",
+            "keywords": [
+                "Artem",
+                "Schander",
+                "artisan",
+                "generator",
+                "l5modular",
+                "laravel",
+                "modular",
+                "module",
+                "modules",
+                "pattern",
+                "structure"
+            ],
+            "support": {
+                "issues": "https://github.com/L5Modular/L5Modular/issues",
+                "source": "https://github.com/L5Modular/L5Modular/tree/2.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Artem-Schander",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/artem_schander",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-07-27T20:47:49+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
@@ -1129,6 +1211,62 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2022-07-13T13:23:09+00:00"
+        },
+        {
+            "name": "laravel/legacy-factories",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/legacy-factories.git",
+                "reference": "5edc7e7eb76e7b4b29221f32139bcbf806c8870f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/legacy-factories/zipball/5edc7e7eb76e7b4b29221f32139bcbf806c8870f",
+                "reference": "5edc7e7eb76e7b4b29221f32139bcbf806c8870f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/macroable": "^8.0|^9.0",
+                "php": "^7.3|^8.0",
+                "symfony/finder": "^3.4|^4.0|^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Illuminate\\Database\\Eloquent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The legacy version of the Laravel Eloquent factories.",
+            "homepage": "http://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
+            "time": "2022-01-13T08:45:08+00:00"
         },
         {
             "name": "laravel/sanctum",
