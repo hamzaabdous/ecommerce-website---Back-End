@@ -13,7 +13,13 @@ class Panier extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('paniers', function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->float("prixTotal");
+
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,7 @@ class Panier extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('panier');
+
     }
 }
