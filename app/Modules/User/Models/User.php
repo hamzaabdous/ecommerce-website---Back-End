@@ -10,11 +10,13 @@ use Laravel\Sanctum\HasApiTokens;
 
 use App\Modules\Role\Models\Role;
 use App\Modules\Picture\Models\Picture;
+use App\Modules\Produit\Models\Produit;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $guarded=["id"];
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +35,9 @@ class User extends Authenticatable
       //  return $this->belongsTo(Picture::class);
         return $this->hasMany(Picture::class);
     }
-
+    public function produit(){
+          return $this->hasMany(Produit::class);
+      }
     protected $fillable = [
         'username',
         "lastName",
@@ -42,6 +46,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'City',
+        'CodePostal',
+        'Genre',
     ];
 
     /**

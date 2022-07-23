@@ -13,7 +13,7 @@ class User extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("username");
             $table->string("lastName");
@@ -21,6 +21,9 @@ class User extends Migration
             $table->string("email");
             $table->string("password");
             $table->string("phoneNumber");
+            $table->string("City");
+            $table->string("CodePostal");
+            $table->string("Genre");
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->rememberToken();

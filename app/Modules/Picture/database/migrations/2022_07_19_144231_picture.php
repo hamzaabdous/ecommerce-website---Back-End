@@ -13,7 +13,7 @@ class Picture extends Migration
      */
     public function up()
     {
-         Schema::create('pictures', function (Blueprint $table) {
+          Schema::create('pictures', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("filename");
             $table->bigInteger('user_id')->unsigned()->nullable();

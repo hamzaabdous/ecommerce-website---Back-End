@@ -21,7 +21,8 @@ class UserController extends Controller
      */
     public function index(){
 
-        $users=User::with('role')->with('picture')->get();
+        $users=User::with('role')->with('picture')->with('produit')->get();
+       // $users=User::all();
 
         return [
             "payload" => $users,
@@ -30,7 +31,6 @@ class UserController extends Controller
     }
     public function get($id){
         $user=User::find($id);
-      //  $picture=Picture::find($user->picture->id);
 
         if(!$user){
             return [
@@ -41,6 +41,7 @@ class UserController extends Controller
         else {
             $user->role=$user->role;
             $user->picture=$user->picture;
+            $user->produit=$user->produit;
             return [
                 "payload" => $user,
                 "status" => "200_1"
