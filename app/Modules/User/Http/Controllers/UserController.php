@@ -5,6 +5,7 @@ namespace App\Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Modules\Produit\Models\Produit;
 use App\Modules\Role\Models\Role;
 use App\Modules\User\Models\User;
 use App\Modules\Picture\Models\Picture;
@@ -146,7 +147,7 @@ class UserController extends Controller
         ];
     }
 
-    public function getUsersProduit($id){
+    public function getProduitsByUser($id){
         $user=User::find($id);
         if(!$user){
             return [
@@ -161,7 +162,79 @@ class UserController extends Controller
             ];
         }
     }
+    public function getUsersByProduit($id){
+        $produit=Produit::find($id);
+        if(!$produit){
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_1"
+            ];
+        }
+        else {
+            return [
+                "payload" => $produit->user()->with('role')->with('picture')->get(),
+                "status" => "200_1"
+            ];
+        }
+    }
 
+    public function addUserToProduit(Request $request){
+        $validator = Validator::make($request->all(), [
+            "user_id" => "required",
+            "produit_id" => "required",
+        ]);
+        if ($validator->fails()) {
+            return [
+                "payload" => $validator->errors(),
+                "status" => "406_2"
+            ];
+        }
+        $user=User::find($request->user_id);
+        if(!$user){
+            return [
+                "payload"=>"User is not exist !",
+                "status"=>"user_404",
+            ];
+        }
+        $produit=Produit::find($request->produit_id);
+        if(!$produit){
+            return [
+                "payload"=>"produit Group is not exist !",
+                "status"=>"produit_404",
+            ];
+        }
+
+        $produit->user()->attach($user);
+        $user->produits=$user->produits;
+        return [
+            "payload" => $user,
+            "status" => "200"
+        ];
+    }
+
+    public function deleteUserToProduit(Request $request){
+        $produit=Produit::find($request->produit_id);
+        if(!$produit){
+            return [
+                "payload" => "The searched produit group row does not exist !",
+                "status" => "404_4"
+            ];
+        }
+        $user=User::find($request->user_id);
+        if(!$user){
+            return [
+                "payload" => "The searched user row does not exist !",
+                "status" => "404_4"
+            ];
+        }
+
+            $produit->user()->detach($user);
+            return [
+                "payload" => "Deleted successfully",
+                "status" => "200_4"
+            ];
+
+    }
 
     public function changePassword(Request $request){
 
