@@ -21,9 +21,9 @@ class User extends Migration
             $table->string("email");
             $table->string("password");
             $table->string("phoneNumber");
-            $table->string("City");
-            $table->string("CodePostal");
-            $table->string("Genre");
+            $table->string("city");
+            $table->string("codePostal");
+            $table->string("genre");
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->rememberToken();

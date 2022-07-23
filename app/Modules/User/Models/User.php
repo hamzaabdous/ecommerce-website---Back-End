@@ -35,9 +35,10 @@ class User extends Authenticatable
       //  return $this->belongsTo(Picture::class);
         return $this->hasMany(Picture::class);
     }
-    public function produit(){
-          return $this->hasMany(Produit::class);
+    public function produits(){
+          return $this->belongsToMany(Produit::class,"user_produit")->withTimestamps();;
       }
+
     protected $fillable = [
         'username',
         "lastName",
@@ -46,9 +47,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'City',
-        'CodePostal',
-        'Genre',
+        'city',
+        'codePostal',
+        'genre',
     ];
 
     /**

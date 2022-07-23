@@ -21,9 +21,11 @@ Route::group([
 ], function ($router) {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/{id}', [UserController::class, 'get']);
+    Route::get('/getUsersProduit/{id}', [UserController::class, 'getUsersProduit']);
     Route::post('/create', [UserController::class, 'create']);
     Route::post('/update', [UserController::class, 'update']);
     Route::post('/delete', [UserController::class, 'delete']);
+
 });
 
 

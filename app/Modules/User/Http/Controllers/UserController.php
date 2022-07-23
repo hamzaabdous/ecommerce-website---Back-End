@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index(){
 
-        $users=User::with('role')->with('picture')->with('produit')->get();
+        $users=User::with('role')->with('picture')->get();
        // $users=User::all();
 
         return [
@@ -41,7 +41,7 @@ class UserController extends Controller
         else {
             $user->role=$user->role;
             $user->picture=$user->picture;
-            $user->produit=$user->produit;
+           // $user->produit=$user->produit;
             return [
                 "payload" => $user,
                 "status" => "200_1"
@@ -145,6 +145,23 @@ class UserController extends Controller
             "status" => "200"
         ];
     }
+
+    public function getUsersProduit($id){
+        $user=User::find($id);
+        if(!$user){
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_1"
+            ];
+        }
+        else {
+            return [
+                "payload" => $user->produits()->with("categorie")->get(),
+                "status" => "200_1"
+            ];
+        }
+    }
+
 
     public function changePassword(Request $request){
 
