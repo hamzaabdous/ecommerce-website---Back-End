@@ -11,7 +11,7 @@ Route::group([
 
 ], function ($router) {
 
-
+    Route::post('/photosProduits', [PictureController::class, 'photosProduits']);
     Route::post('/photoprofile', [PictureController::class, 'photoprofile']);
     Route::post('/PhotosStoragePath', [PictureController::class, 'PhotosStoragePath']);
 

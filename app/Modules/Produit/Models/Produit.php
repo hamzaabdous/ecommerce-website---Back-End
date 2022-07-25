@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Categorie\Models\Categorie;
 use App\Modules\User\Models\User;
+use App\Modules\Picture\Models\Picture;
 
 class Produit extends Model
 {
@@ -21,8 +22,11 @@ class Produit extends Model
     {
         return $this->belongsToMany(User::class,"user_produit")->withTimestamps();;
     }
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class,'Produit_id');
+    }
     protected $fillable = [
-        'user_id',
         'name',
         'description',
         'stock',
@@ -32,7 +36,6 @@ class Produit extends Model
     ];
 
     protected $hidden = [
-        'user_id',
     ];
 
 

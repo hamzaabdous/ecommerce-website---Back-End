@@ -17,7 +17,7 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produit = Produit::with('categorie')->get();
+        $produit = Produit::with('categorie')->with('pictures')->get();
         return [
             "payload" => $produit,
             "status" => "200_00"
@@ -35,6 +35,8 @@ class ProduitController extends Controller
         }
         else {
             $produit->categorie=$produit->categorie;
+            $produit->pictures=$produit->pictures;
+
             return [
                 "payload" => $produit,
                 "status" => "200_1"
@@ -47,11 +49,13 @@ class ProduitController extends Controller
             "name" => "required|string|unique:categories,name",
             "prix" => "required:categories,prix",
             "stock" => "required|integer:categories,stock",
-            "categorie_id" => "required|integer:categories,bigInteger",
+            "categorie_id" => "required|integer:categories,categorie_id",
         ]);
+
         if ($validator->fails()) {
             return [
                 "payload" => $validator->errors(),
+                "hamza" =>$request->all(),
                 "status" => "406_2"
             ];
         }

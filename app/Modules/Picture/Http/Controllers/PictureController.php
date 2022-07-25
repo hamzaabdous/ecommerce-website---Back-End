@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Libs\UploadTrait;
 use App\Modules\User\Models\User;
 use App\Modules\Picture\Models\Picture;
+use App\Modules\Produit\Models\Produit;
 
 class PictureController extends Controller
 {
@@ -37,6 +38,13 @@ class PictureController extends Controller
                 "status"=>"user_404",
             ];
         }
+        $produit=Produit::find($request->Produit_id);
+        if(!$produit){
+            return [
+                "payload"=>"produit is not exist !",
+                "status"=>"produit_404",
+            ];
+        }
         $picture=new Picture();
 
         if($request->file()) {
@@ -46,6 +54,7 @@ class PictureController extends Controller
                 $this->uploadOne($file, config('cdn.usersPhotos.path'),$filename);
                 $picture->filename=$filename;
                 $picture->user_id=$user->id;
+                $picture->Produit_id=$produit->id;
                 $picture->save();
             }
         }
@@ -53,6 +62,44 @@ class PictureController extends Controller
         $user->picture=$picture;
         return [
             "payload"=>$user,
+            "status"=>"200_04",
+        ];
+    }
+    public function photosProduits(Request $request){
+        $validator = Validator::make($request->all(), [
+            "Produit_id" => "required",
+        ]);
+        if ($validator->fails()) {
+            return [
+                "payload" => $validator->errors(),
+                "status" => "406_2"
+            ];
+        }
+
+        $produit=Produit::find($request->Produit_id);
+        if(!$produit){
+            return [
+                "payload"=>"produit is not exist !",
+                "status"=>"produit_404",
+            ];
+        }
+
+        if($request->file()) {
+            for ($i=0;$i<count($request->photos);$i++){
+                $file=$request->photos[$i];
+                $filename=time()."_".$file->getClientOriginalName();
+                $this->uploadOne($file, config('cdn.usersPhotos.path'),$filename);
+                $picture=new Picture();
+
+                $picture->filename=$filename;
+                $picture->Produit_id=$produit->id;
+                $picture->save();
+            }
+        }
+        $produit->categorie=$produit->categorie;
+        $produit->pictures=$produit->pictures;
+        return [
+            "payload"=>$produit,
             "status"=>"200_04",
         ];
     }
