@@ -41,7 +41,7 @@ class CommandeController extends Controller
         if (command::where('id', $id)->exists()) {
             $cmd = Command::find($id);
             $cmd->name = is_null($request->status_commande) ? $cmd->status_commande : $request->status_commande;
-            $cmd->author = is_null($request->quantity) ? $cmd->quantity : $request->quantity;
+            $cmd->quantity = is_null($request->quantity) ? $cmd->quantity : $request->quantity;
             $cmd->publish_date = is_null($request->publish_date) ? $cmd->publish_date : $request->publish_date;
             $cmd->save();
             return response()->json([
