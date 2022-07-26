@@ -10,25 +10,25 @@ class CommandeController extends Controller
     //
     public function index()
     {
-        $books = Command::all();
-        return response()->json($books);
+        $Commands = Command::all();
+        return response()->json($Commands);
     }
     public function store(Request $request)
     {
-        $book = new Command;
-        $book->status_commande = $request->status_commande;
-        $book->quantity = $request->quantity;
-        $book->publish_date = $request->publish_date;
-        $book->save();
+        $cmd = new Command;
+        $cmd->status_commande = $request->status_commande;
+        $cmd->quantity = $request->quantity;
+        $cmd->publish_date = $request->publish_date;
+        $cmd->save();
         return response()->json([
             "message" => "Book Added."
         ], 201);
     }
     public function show($id)
     {
-        $book = Command::find($id);
-        if (!empty($book)) {
-            return response()->json($book);
+        $cmd = Command::find($id);
+        if (!empty($cmd)) {
+            return response()->json($cmd);
         } else {
             return response()->json([
                 "message" => "Book not found"
@@ -39,11 +39,11 @@ class CommandeController extends Controller
     public function update(Request $request, $id)
     {
         if (command::where('id', $id)->exists()) {
-            $book = Command::find($id);
-            $book->name = is_null($request->status_commande) ? $book->status_commande : $request->status_commande;
-            $book->author = is_null($request->quantity) ? $book->quantity : $request->quantity;
-            $book->publish_date = is_null($request->publish_date) ? $book->publish_date : $request->publish_date;
-            $book->save();
+            $cmd = Command::find($id);
+            $cmd->name = is_null($request->status_commande) ? $cmd->status_commande : $request->status_commande;
+            $cmd->author = is_null($request->quantity) ? $cmd->quantity : $request->quantity;
+            $cmd->publish_date = is_null($request->publish_date) ? $cmd->publish_date : $request->publish_date;
+            $cmd->save();
             return response()->json([
                 "message" => "Book Updated."
             ], 404);
@@ -56,8 +56,8 @@ class CommandeController extends Controller
     public function destroy($id)
     {
         if(Command::where('id', $id)->exists()) {
-            $book = Command::find($id);
-            $book->delete();
+            $cmd = Command::find($id);
+            $cmd->delete();
 
             return response()->json([
               "message" => "records deleted."
