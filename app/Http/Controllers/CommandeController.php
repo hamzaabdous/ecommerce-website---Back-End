@@ -21,7 +21,7 @@ class CommandeController extends Controller
         $cmd->publish_date = $request->publish_date;
         $cmd->save();
         return response()->json([
-            "message" => "Book Added."
+            "message" => "commande Added."
         ], 201);
     }
     public function show($id)
@@ -31,7 +31,7 @@ class CommandeController extends Controller
             return response()->json($cmd);
         } else {
             return response()->json([
-                "message" => "Book not found"
+                "message" => "commande not found"
             ], 404);
         }
     }
@@ -45,11 +45,11 @@ class CommandeController extends Controller
             $cmd->publish_date = is_null($request->publish_date) ? $cmd->publish_date : $request->publish_date;
             $cmd->save();
             return response()->json([
-                "message" => "Book Updated."
+                "message" => "commande Updated."
             ], 404);
         } else {
             return response()->json([
-                "message" => "Book Not Found."
+                "message" => "commande Not Found."
             ], 404);
         }
     }
@@ -64,7 +64,7 @@ class CommandeController extends Controller
             ], 202);
         } else {
             return response()->json([
-              "message" => "book not found."
+              "message" => "commande not found."
             ], 404);
         }
     }
