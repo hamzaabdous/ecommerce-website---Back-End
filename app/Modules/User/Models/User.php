@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Modules\Role\Models\Role;
 use App\Modules\Picture\Models\Picture;
 use App\Modules\Produit\Models\Produit;
+use App\Modules\Panier\Models\Panier;
 
 class User extends Authenticatable
 {
@@ -38,7 +39,10 @@ class User extends Authenticatable
     public function produits(){
           return $this->belongsToMany(Produit::class,"user_produit")->withTimestamps();;
       }
-
+      public function panier()
+      {
+          return $this->hasOne(Panier::class,"user_id");
+      }
     protected $fillable = [
         'username',
         "lastName",

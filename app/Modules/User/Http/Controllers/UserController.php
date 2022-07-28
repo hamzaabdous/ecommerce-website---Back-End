@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(){
 
-        $users=User::with('role')->with('picture')->get();
+        $users=User::with('role')->with('picture')->with('panier')->get();
        // $users=User::all();
 
         return [
@@ -42,6 +42,8 @@ class UserController extends Controller
         else {
             $user->role=$user->role;
             $user->picture=$user->picture;
+            $user->panier=$user->panier;
+
            // $user->produit=$user->produit;
             return [
                 "payload" => $user,
