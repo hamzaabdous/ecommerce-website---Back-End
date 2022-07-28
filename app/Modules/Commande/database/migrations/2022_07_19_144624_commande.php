@@ -13,7 +13,12 @@ class Commande extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('commandes', function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->string("status_commande");
+            $table->string("QTE");
+            $table->timestamps();
+        });
     }
 
     /**
