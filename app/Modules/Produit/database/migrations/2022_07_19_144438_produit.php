@@ -21,6 +21,8 @@ class Produit extends Migration
             $table->float('prix', 50, 2);
             $table->bigInteger('categorie_id')->unsigned();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

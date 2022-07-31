@@ -5,6 +5,7 @@ namespace App\Modules\Panier\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\User\Models\User;
+use App\Modules\Produit\Models\Produit;
 
 class Panier extends Model
 {
@@ -16,6 +17,9 @@ class Panier extends Model
         return $this->belongsTo(User::class,"id");
     }
 
+    public function produits(){
+        return $this->belongsToMany(Produit::class,"produits_paniers")->withTimestamps();;
+    }
     protected $fillable = [
         'prixTotal',
         'user_id'

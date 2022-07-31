@@ -43,6 +43,9 @@ class UserController extends Controller
             $user->role=$user->role;
             $user->picture=$user->picture;
             $user->panier=$user->panier;
+            if ($user->panier!=null) {
+                $user->panier->produits=$user->panier->produits;
+            }
 
            // $user->produit=$user->produit;
             return [

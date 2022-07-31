@@ -38,13 +38,6 @@ class PictureController extends Controller
                 "status"=>"user_404",
             ];
         }
-        $produit=Produit::find($request->Produit_id);
-        if(!$produit){
-            return [
-                "payload"=>"produit is not exist !",
-                "status"=>"produit_404",
-            ];
-        }
         $picture=new Picture();
 
         if($request->file()) {
@@ -54,7 +47,6 @@ class PictureController extends Controller
                 $this->uploadOne($file, config('cdn.usersPhotos.path'),$filename);
                 $picture->filename=$filename;
                 $picture->user_id=$user->id;
-                $picture->Produit_id=$produit->id;
                 $picture->save();
             }
         }

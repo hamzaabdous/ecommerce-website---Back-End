@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Panier extends Migration
+class CreateFacture extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class Panier extends Migration
      */
     public function up()
     {
-        Schema::create('paniers', function (Blueprint $table) {
+        Schema::create('factures', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->float("prixTotal")->nullable();
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->float("mantant")->nullable();
             $table->timestamps();
         });
     }
@@ -29,7 +27,6 @@ class Panier extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('panier');
-
+        Schema::dropIfExists('facture');
     }
 }

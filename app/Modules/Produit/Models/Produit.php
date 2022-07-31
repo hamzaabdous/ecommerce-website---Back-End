@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\Categorie\Models\Categorie;
 use App\Modules\User\Models\User;
 use App\Modules\Picture\Models\Picture;
+use App\Modules\Panier\Models\Panier;
 
 class Produit extends Model
 {
@@ -26,12 +27,15 @@ class Produit extends Model
     {
         return $this->hasMany(Picture::class,'Produit_id');
     }
+    public function paniers(){
+        return $this->belongsToMany(Panier::class,"produits_paniers")->withTimestamps();;
+    }
     protected $fillable = [
         'name',
         'description',
         'stock',
         'prix',
-        'categorie_id'
+        'categorie_id',
 
     ];
 

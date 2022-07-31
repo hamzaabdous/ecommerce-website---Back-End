@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Modules\Categorie\Models;
+namespace App\Modules\Facture\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\Produit\Models\Produit;
 
-class Categorie extends Model
+class Facture extends Model
 {
     use HasFactory;
     protected $guarded=["id"];
-    public function produit()
-    {
-        return $this->belongsTo(Produit::class);
-    }
+
     protected $fillable = [
-        'name',
-        'description'
+        'mantant',
     ];
 
     protected $casts = [

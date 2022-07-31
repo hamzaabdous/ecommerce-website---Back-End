@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\Modules\Produit\Models\Produit;
+use App\Modules\Panier\Models\Panier;
+
 class ProduitController extends Controller
 {
 
@@ -113,6 +115,51 @@ class ProduitController extends Controller
         $produit->stock=$request->stock;
         $produit->prix=$request->prix;
         $produit->categorie_id=$request->categorie_id;
+        $produit->save();
+        return [
+            "payload" => $produit,
+            "status" => "200"
+        ];
+    }
+
+    public function addProduitToPanier(Request $request){
+        $validator = Validator::make($request->all(), [
+            "id" => "required",
+            "panier_id" =>"required",
+        ]);
+        if ($validator->fails()) {
+            return [
+                "payload" => $validator->errors(),
+                "status" => "406_2"
+            ];
+        }
+        $produit=Produit::find($request->id);
+        if (!$produit) {
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_3-produit"
+            ];
+        }
+        $panier=Panier::find($request->id);
+        if (!$panier) {
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_3-panier"
+            ];
+        }
+        if($request->name!=$produit->name){
+            if(Produit::where("name",$request->name)->count()>0)
+                return [
+                    "payload" => "The produit has been already taken ! ",
+                    "status" => "406_2"
+                ];
+        }
+        $produit->name=$request->name;
+        $produit->description=$request->description;
+        $produit->stock=$request->stock;
+        $produit->prix=$request->prix;
+        $produit->categorie_id=$request->categorie_id;
+        $produit->panier_id=$request->panier_id;
         $produit->save();
         return [
             "payload" => $produit,
