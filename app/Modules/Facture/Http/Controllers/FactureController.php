@@ -18,7 +18,7 @@ class FactureController extends Controller
 
     public function index()
     {
-        $facture = Facture::all();
+        $facture = Facture::with('commande')->get();
         return [
             "payload" => $facture,
             "status" => "200_00"

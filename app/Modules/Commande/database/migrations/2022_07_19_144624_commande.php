@@ -16,7 +16,9 @@ class Commande extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("status_commande");
-            $table->string("QTE");
+            $table->string("mantant");
+            $table->bigInteger('facture_id')->unsigned();
+            $table->foreign('facture_id')->references('id')->on('factures')->onDelete('cascade');
             $table->timestamps();
         });
     }

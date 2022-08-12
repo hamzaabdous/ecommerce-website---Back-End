@@ -13,8 +13,9 @@ class CreateLigneCommande extends Migration
      */
     public function up()
     {
-        Schema::create('ligne_commande', function (Blueprint $table) {
+        Schema::create('ligne_commandes', function (Blueprint $table) {
             $table->id();
+            $table->float('qte');
             $table->timestamps();
         });
     }

@@ -14,7 +14,6 @@ Route::group([
     Route::post('/create', [ProduitController::class, 'create']);
     Route::post('/update', [ProduitController::class, 'update']);
     Route::post('/delete', [ProduitController::class, 'delete']);
-
     Route::post('/addProduitToPanier', [ProduitController::class, 'addProduitToPanier']);
 
 });
