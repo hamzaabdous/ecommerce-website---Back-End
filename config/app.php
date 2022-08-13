@@ -189,6 +189,7 @@ return [
     */
 
     'aliases' => [
+        'Goutte' => Weidner\Goutte\GoutteFacade::class, // [2] It will register as an alias for the Goutte facade
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Modules\Produit\Http\Controllers\ProduitController;
+use App\Modules\Produit\Http\Controllers\scrapingController;
 
 
 Route::group([
@@ -15,5 +16,15 @@ Route::group([
     Route::post('/update', [ProduitController::class, 'update']);
     Route::post('/delete', [ProduitController::class, 'delete']);
     Route::post('/addProduitToPanier', [ProduitController::class, 'addProduitToPanier']);
+
+});
+
+Route::group([
+    'prefix' => 'api/scraping'
+
+], function ($router) {
+    Route::get('/ebay', [scrapingController::class, 'scrapingFromEbay']);
+    Route::get('/jumia', [scrapingController::class, 'scrapingFromJumia']);
+
 
 });
