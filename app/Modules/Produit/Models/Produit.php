@@ -36,6 +36,7 @@ class Produit extends Model
         'stock',
         'prix',
         'categorie_id',
+        'brand',
 
     ];
 

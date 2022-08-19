@@ -44,7 +44,7 @@ class PictureController extends Controller
             for ($i=0;$i<count($request->photos);$i++){
                 $file=$request->photos[$i];
                 $filename=time()."_".$file->getClientOriginalName();
-                $this->uploadOne($file, config('cdn.usersPhotos.path'),$filename);
+                $this->uploadOne($file, config('cdn.userprofile.path'),$filename);
                 $picture->filename=$filename;
                 $picture->user_id=$user->id;
                 $picture->save();
@@ -80,7 +80,7 @@ class PictureController extends Controller
             for ($i=0;$i<count($request->photos);$i++){
                 $file=$request->photos[$i];
                 $filename=time()."_".$file->getClientOriginalName();
-                $this->uploadOne($file, config('cdn.usersPhotos.path'),$filename);
+                $this->uploadOne($file, config('cdn.produitimages.path'),$filename);
                 $picture=new Picture();
 
                 $picture->filename=$filename;
@@ -99,7 +99,7 @@ class PictureController extends Controller
 
     public function PhotosStoragePath(){
         return [
-            "payload" => asset("/storage/cdn/usersPhotos/"),
+            "payload" => asset("/storage/cdn/damagePhotos/"),
             "status" => "200_1"
         ];
     }

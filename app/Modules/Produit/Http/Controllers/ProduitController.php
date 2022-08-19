@@ -113,6 +113,7 @@ class ProduitController extends Controller
         $produit->name=$request->name;
         $produit->description=$request->description;
         $produit->stock=$request->stock;
+        $produit->brand=$request->brand;
         $produit->prix=$request->prix;
         $produit->categorie_id=$request->categorie_id;
         $produit->save();
@@ -157,6 +158,7 @@ class ProduitController extends Controller
         $produit->name=$request->name;
         $produit->description=$request->description;
         $produit->stock=$request->stock;
+        $produit->brand=$request->brand;
         $produit->prix=$request->prix;
         $produit->categorie_id=$request->categorie_id;
         $produit->panier_id=$request->panier_id;
