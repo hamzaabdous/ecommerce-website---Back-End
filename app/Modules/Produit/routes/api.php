@@ -24,7 +24,7 @@ Route::group([
 
 ], function ($router) {
     Route::get('/ebay', [scrapingController::class, 'scrapingFromEbay']);
-    Route::get('/jumia', [scrapingController::class, 'scrapingFromJumia']);
+    Route::post('/jumia', [scrapingController::class, 'scrapingFromJumia']);
 
 
 });

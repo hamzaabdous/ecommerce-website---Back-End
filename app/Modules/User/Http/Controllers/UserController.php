@@ -291,6 +291,9 @@ class UserController extends Controller
                 "status" => "401"
             ];
         }
+        $user->role=$user->role;
+            $user->picture=$user->picture;
+            $user->panier=$user->panier;
         $token = $user->createToken('myapptoken')->plainTextToken;
         $response = [
             'user' => $user,

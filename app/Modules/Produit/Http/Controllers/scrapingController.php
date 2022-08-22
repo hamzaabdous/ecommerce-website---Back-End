@@ -44,12 +44,12 @@ class scrapingController extends Controller
         ];
     }
 
-    public function scrapingFromJumia()
+    public function scrapingFromJumia(Request $request)
     {
 
         $client = new Client(HttpClient::create(['timeout' => 60]));
 
-        $crawler = $client->request('GET', 'https://www.jumia.ma/macbook/');
+        $crawler = $client->request('GET', 'https://www.jumia.ma/catalog/?q='.(string)$request->name);
 
 
          $listdata= $crawler->filter('.prd .core')->each(function ($node) {
