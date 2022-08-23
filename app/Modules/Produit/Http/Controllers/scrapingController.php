@@ -70,20 +70,31 @@ class scrapingController extends Controller
 
          $listdata= $crawler->filter('.prd .core')->each(function ($node) {
 
+            $brand= $node->attr('data-brand');
+            $category= $node->attr('data-category');
+
             $title= $node->filter('.info .name')->text();
             $price= $node->filter('.info  .prc')->text();
             $url= $node->attr('href');
-            $img= $node->filter('.img')->attr('src');
+
+             $img= $node->filter('.img-c .img')->each(function ($nodeimg) {
+
+                return $nodeimg->outerHtml();
+            });
+            $src= $node->filter('.img-c .img')->attr('data-src');
 
             $pricedescount= $node->filter('.info  .s-prc-w .old')->count()? $node->filter('.info  .s-prc-w .old')->text() : null;
             $descount= $node->filter('.info  .s-prc-w ._dsct')->count() ? $node->filter('.info  .s-prc-w ._dsct')->text() : null;
 
             $produitModule = new stdClass();
-            $produitModule->title =$title;
-            $produitModule->price =$price;
+            $produitModule->name =$title;
+            $produitModule->brand =$brand;
+            $produitModule->category =$category;
+            $produitModule->prix =$price;
             $produitModule->pricedescount =$pricedescount;
             $produitModule->descount =$descount;
-            $produitModule->img =$img;
+            $produitModule->pictures =$img;
+            $produitModule->src =$src;
 
             $produitModule->url =$url;
             $item =[$produitModule];
@@ -114,7 +125,7 @@ class scrapingController extends Controller
              return $node->attr('href');
          }); */
         return [
-            "listdata" => $listdata,
+            "payload" => $listdata,
             "status" => "200"
         ];
     }
