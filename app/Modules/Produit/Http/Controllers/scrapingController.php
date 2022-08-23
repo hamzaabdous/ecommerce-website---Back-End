@@ -67,9 +67,8 @@ class scrapingController extends Controller
 
         $crawler = $client->request('GET', 'https://www.jumia.ma/catalog/?q='.(string)$request->name);
 
-
-         $listdata= $crawler->filter('.prd .core')->each(function ($node) {
-
+         $listdata= $crawler->filter('.prd .core')->each(function ($node,$i) {
+            $id=$i+1;
             $brand= $node->attr('data-brand');
             $category= $node->attr('data-category');
 
@@ -87,6 +86,7 @@ class scrapingController extends Controller
             $descount= $node->filter('.info  .s-prc-w ._dsct')->count() ? $node->filter('.info  .s-prc-w ._dsct')->text() : null;
 
             $produitModule = new stdClass();
+            $produitModule->id =$id;
             $produitModule->name =$title;
             $produitModule->brand =$brand;
             $produitModule->category =$category;
