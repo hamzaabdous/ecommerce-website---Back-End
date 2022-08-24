@@ -162,7 +162,7 @@ class UserController extends Controller
         }
         else {
             return [
-                "payload" => $user->produits()->with("categorie")->get(),
+                "payload" => $user->produits()->with("categorie")->with("pictures")->get(),
                 "status" => "200_1"
             ];
         }
