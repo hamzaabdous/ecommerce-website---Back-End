@@ -18,6 +18,7 @@ class Produit extends Migration
             $table->string("name");
             $table->string("description");
             $table->string("brand");
+            $table->string("src")->default("")->nullable();
             $table->integer("stock");
             $table->float('prix', 50, 2);
             $table->bigInteger('categorie_id')->unsigned();

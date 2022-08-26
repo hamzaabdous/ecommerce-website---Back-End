@@ -37,6 +37,7 @@ class Produit extends Model
         'prix',
         'categorie_id',
         'brand',
+        'src'
 
     ];
 

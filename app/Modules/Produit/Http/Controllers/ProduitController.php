@@ -114,6 +114,7 @@ class ProduitController extends Controller
         $produit->description=$request->description;
         $produit->stock=$request->stock;
         $produit->brand=$request->brand;
+        $produit->src=$request->src;
         $produit->prix=$request->prix;
         $produit->categorie_id=$request->categorie_id;
         $produit->save();
