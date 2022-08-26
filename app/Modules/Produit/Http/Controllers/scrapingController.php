@@ -68,64 +68,50 @@ class scrapingController extends Controller
         $crawler = $client->request('GET', 'https://www.jumia.ma/catalog/?q='.(string)$request->name);
 
          $listdata= $crawler->filter('.prd .core')->each(function ($node,$i) {
-            $id=$i+1;
-            $brand= $node->attr('data-brand');
-            $category= $node->attr('data-category');
 
-            $title= $node->filter('.info .name')->text();
-            $price= $node->filter('.info  .prc')->text();
-            $url= $node->attr('href');
+            if ($node->filter('.info .name')->text()!='') {
+                $id=$i+1;
+                $brand= $node->attr('data-brand');
+                $category= $node->attr('data-category');
 
-             $img= $node->filter('.img-c .img')->each(function ($nodeimg) {
+                $title= $node->filter('.info .name')->text();
+                $price= $node->filter('.info  .prc')->text();
+                $url= $node->attr('href');
 
-                return $nodeimg->outerHtml();
-            });
-            $src= $node->filter('.img-c .img')->attr('data-src');
+                 $img= $node->filter('.img-c .img')->each(function ($nodeimg) {
 
-            $pricedescount= $node->filter('.info  .s-prc-w .old')->count()? $node->filter('.info  .s-prc-w .old')->text() : null;
-            $descount= $node->filter('.info  .s-prc-w ._dsct')->count() ? $node->filter('.info  .s-prc-w ._dsct')->text() : null;
+                    return $nodeimg->outerHtml();
+                });
+                $src= $node->filter('.img-c .img')->attr('data-src');
 
-            $produitModule = new stdClass();
-            $produitModule->id =$id;
-            $produitModule->name =$title;
-            $produitModule->brand =$brand;
-            $produitModule->category =$category;
-            $produitModule->prix =$price;
-            $produitModule->pricedescount =$pricedescount;
-            $produitModule->descount =$descount;
-            $produitModule->pictures =$img;
-            $produitModule->src =$src;
+                $pricedescount= $node->filter('.info  .s-prc-w .old')->count()? $node->filter('.info  .s-prc-w .old')->text() : null;
+                $descount= $node->filter('.info  .s-prc-w ._dsct')->count() ? $node->filter('.info  .s-prc-w ._dsct')->text() : null;
 
-            $produitModule->url =$url;
-            $item =[$produitModule];
+                $produitModule = new stdClass();
+                $produitModule->id =$id;
+                $produitModule->name =$title;
+                $produitModule->brand =$brand;
+                $produitModule->category =$category;
+                $produitModule->prix =$price;
+                $produitModule->pricedescount =$pricedescount;
+                $produitModule->descount =$descount;
+                $produitModule->pictures =$img;
+                $produitModule->src =$src;
 
-            return $item[0];
+                $produitModule->url =$url;
+                $item =[$produitModule];
+                return $item[0];
+            };
+
+
             // $data->push($item);
              //var_dump($data);
           });
 
-        /* $title= $crawler->filter('.prd .core .info .name')->each(function ($node) {
-          //  dump($node->text());
-            return $node->text();
-        });
-        $price = $crawler->filter('.prd .core .info .prc')->each(function ($node) {
-           // dump($node->text());
-            return $node->text();
-        });
-        $pricedescount = $crawler->filter('.prd .core .info .s-prc-w .old')->each(function ($node) {
-            // dump($node->text());
-             return $node->text();
-         });
-         $descount = $crawler->filter('.prd .core .info .s-prc-w ._dsct')->each(function ($node) {
-            // dump($node->text());
-             return $node->text();
-         });
-         $url = $crawler->filter('.prd .core')->each(function ($node) {
-            // dump($node->text());
-             return $node->attr('href');
-         }); */
+          $myarray = array_filter($listdata);            //removes all null values
+
         return [
-            "payload" => $listdata,
+            "payload" => $myarray,
             "status" => "200"
         ];
     }
