@@ -92,7 +92,7 @@ class scrapingController extends Controller
                 $produitModule->name =$title;
                 $produitModule->brand =$brand;
                 $produitModule->category =$category;
-                $produitModule->prix =$price;
+                $produitModule->prix =trim($price, ", Dhs");
                 $produitModule->pricedescount =$pricedescount;
                 $produitModule->descount =$descount;
                 $produitModule->pictures =$img;
