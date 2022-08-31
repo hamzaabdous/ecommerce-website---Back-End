@@ -125,6 +125,72 @@ class PanierController extends Controller
         }
     }
 
+    public function getProduitsByUser($id){
+        $user=User::find($id);
+        if(!$user){
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_1"
+            ];
+        }
+        else {
+            $user->panier=$user->panier;
+            if ($user->panier!=null) {
+                $user->panier->produits=$user->panier->produits;
+            }
+            return [
+                "payload" => $user,
+                "status" => "200_1"
+            ];
+        }
+    }
+    public function makePanierEmptyByUser($id){
+        $user=User::find($id);
+        if(!$user){
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_1"
+            ];
+        }
+        else {
+           // $user->panier=$user->panier;
+            if ($user->panier!=null) {
+               // $user->panier->produits=$user->panier->produits;
+
+                for ($i=0; $i < count($user->panier->produits); $i++) {
+                    $produit=Produit::find($user->panier->produits[$i]->id);
+                    if(!$produit){
+                        return [
+                            "payload" => "The searched produit group row does not exist !",
+                            "status" => "404_4"
+                        ];
+                    }
+                    $panier=Panier::find($user->panier->id);
+                    if(!$panier){
+                        return [
+                            "payload" => "The searched panier row does not exist !",
+                            "status" => "404_4"
+                        ];
+                    }
+                    $produit->paniers()->detach($panier);
+
+                }
+
+            }
+            //$userUpdate=User::find($id);
+            $user->panier=$user->panier;
+            $user->panier->prixTotal=0;
+
+            $user->panier->save();
+            $user->panier->produits=[];
+
+            return [
+                "payload" => $user,
+                "status" => "200_1"
+            ];
+        }
+    }
+
     public function addProduitToPanier(Request $request){
         $validator = Validator::make($request->all(), [
             "panier_id" => "required",
@@ -151,8 +217,16 @@ class PanierController extends Controller
             ];
         }
 
-        $produit->paniers()->attach($panier);
+      //  $produit->paniers()->attach($panier);
+        $produit->paniers()->attach('panier_id', [
+            //you can pass any other pivot filed value you want in here
+            'panier_id' => $request->panier_id,
+            'produit_id' => $request->produit_id,
+            'Qte' => $request->Qte,
+        ]);
         $panier->produits=$panier->produits;
+        $panier->Qte=$request->Qte;
+
         return [
             "payload" => $panier,
             "status" => "200"

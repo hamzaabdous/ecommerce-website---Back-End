@@ -14,6 +14,9 @@ class ProduitPanier extends Migration
     public function up()
     {
           Schema::create('produits_paniers', function (Blueprint $table) {
+
+            $table->integer("Qte");
+
             $table->bigInteger('panier_id')->unsigned();
 
             $table->bigInteger('produit_id')->unsigned();

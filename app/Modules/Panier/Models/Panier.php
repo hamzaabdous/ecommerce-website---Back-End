@@ -18,7 +18,7 @@ class Panier extends Model
     }
 
     public function produits(){
-        return $this->belongsToMany(Produit::class,"produits_paniers")->withTimestamps();;
+        return $this->belongsToMany(Produit::class,"produits_paniers")->withPivot('Qte', 'panier_id','produit_id')->withTimestamps();
     }
     protected $fillable = [
         'prixTotal',

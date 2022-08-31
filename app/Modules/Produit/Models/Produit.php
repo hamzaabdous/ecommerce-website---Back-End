@@ -21,14 +21,14 @@ class Produit extends Model
     }
      public function user()
     {
-        return $this->belongsToMany(User::class,"user_produit")->withTimestamps();;
+        return $this->belongsToMany(User::class,"user_produit")->withTimestamps();
     }
     public function pictures()
     {
         return $this->hasMany(Picture::class,'Produit_id');
     }
     public function paniers(){
-        return $this->belongsToMany(Panier::class,"produits_paniers")->withTimestamps();;
+        return $this->belongsToMany(Panier::class,"produits_paniers")->withPivot('Qte', 'panier_id','produit_id')->withTimestamps();
     }
     protected $fillable = [
         'name',
