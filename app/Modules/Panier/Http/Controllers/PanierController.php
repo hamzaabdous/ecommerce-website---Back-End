@@ -250,8 +250,13 @@ class PanierController extends Controller
         }
 
             $produit->paniers()->detach($panier);
+            $user=User::find($panier->user_id);
+            $user->panier=$user->panier;
+            if ($user->panier!=null) {
+                $user->panier->produits=$user->panier->produits;
+            }
             return [
-                "payload" => "Deleted successfully",
+                "payload" => $user,
                 "status" => "200_4"
             ];
 
