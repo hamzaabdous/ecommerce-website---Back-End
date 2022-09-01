@@ -19,7 +19,7 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produit = Produit::with('categorie')->with('pictures')->get();
+        $produit = Produit::with('categorie')->with('pictures')->with('LigneCommande')->get();
         return [
             "payload" => $produit,
             "status" => "200_00"
@@ -38,6 +38,7 @@ class ProduitController extends Controller
         else {
             $produit->categorie=$produit->categorie;
             $produit->pictures=$produit->pictures;
+            $produit->ligne_commande=$produit->LigneCommande;
 
             return [
                 "payload" => $produit,

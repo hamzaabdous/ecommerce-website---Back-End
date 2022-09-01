@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(){
 
-        $users=User::with('role')->with('picture')->with('panier')->get();
+        $users=User::with('role')->with('picture')->with('panier')->with('ligneCommande')->get();
        // $users=User::all();
 
         return [
@@ -46,6 +46,7 @@ class UserController extends Controller
             if ($user->panier!=null) {
                 $user->panier->produits=$user->panier->produits;
             }
+            $user->ligne_commande=$user->ligneCommande;
 
            // $user->produit=$user->produit;
             return [

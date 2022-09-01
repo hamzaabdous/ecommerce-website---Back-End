@@ -12,6 +12,7 @@ use App\Modules\Role\Models\Role;
 use App\Modules\Picture\Models\Picture;
 use App\Modules\Produit\Models\Produit;
 use App\Modules\Panier\Models\Panier;
+use App\Modules\LigneCommande\Models\LigneCommande;
 
 class User extends Authenticatable
 {
@@ -36,6 +37,10 @@ class User extends Authenticatable
       //  return $this->belongsTo(Picture::class);
         return $this->hasMany(Picture::class);
     }
+    public function LigneCommande(){
+        //  return $this->belongsTo(Picture::class);
+          return $this->hasMany(LigneCommande::class);
+      }
     public function produits(){
           return $this->belongsToMany(Produit::class,"user_produit")->withTimestamps();;
       }

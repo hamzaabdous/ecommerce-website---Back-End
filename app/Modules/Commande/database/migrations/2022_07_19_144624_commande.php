@@ -17,7 +17,7 @@ class Commande extends Migration
             $table->bigIncrements("id");
             $table->string("status_commande");
             $table->string("mantant");
-            $table->bigInteger('facture_id')->unsigned();
+            $table->bigInteger('facture_id')->unsigned()->nullable();
             $table->foreign('facture_id')->references('id')->on('factures')->onDelete('cascade');
             $table->timestamps();
         });

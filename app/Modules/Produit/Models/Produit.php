@@ -8,6 +8,7 @@ use App\Modules\Categorie\Models\Categorie;
 use App\Modules\User\Models\User;
 use App\Modules\Picture\Models\Picture;
 use App\Modules\Panier\Models\Panier;
+use App\Modules\LigneCommande\Models\LigneCommande;
 
 class Produit extends Model
 {
@@ -29,6 +30,10 @@ class Produit extends Model
     }
     public function paniers(){
         return $this->belongsToMany(Panier::class,"produits_paniers")->withPivot('Qte', 'panier_id','produit_id')->withTimestamps();
+    }
+    public function LigneCommande()
+    {
+        return $this->hasMany(LigneCommande::class,);
     }
     protected $fillable = [
         'name',

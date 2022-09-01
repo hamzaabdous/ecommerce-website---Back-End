@@ -17,7 +17,7 @@ class LigneCommandeController extends Controller
      */
     public function index()
     {
-        $ligneCommande = LigneCommande::all();
+        $ligneCommande = LigneCommande::with('produit')->with('user')->with('commande')->get();
         return [
             "payload" => $ligneCommande,
             "status" => "200_00"
@@ -34,6 +34,10 @@ class LigneCommandeController extends Controller
             ];
         }
         else {
+            $ligneCommande->produit=$ligneCommande->produit;
+            $ligneCommande->user=$ligneCommande->user;
+            $ligneCommande->commande=$ligneCommande->commande;
+
             return [
                 "payload" => $ligneCommande,
                 "status" => "200_1"
@@ -78,6 +82,8 @@ class LigneCommandeController extends Controller
         }
 
         $ligneCommande->qte=$request->qte;
+        $ligneCommande->commande_id=$request->commande_id;
+
         $ligneCommande->save();
         return [
             "payload" => $ligneCommande,
